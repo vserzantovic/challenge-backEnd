@@ -1,6 +1,9 @@
 package vserzantovic.chalenge;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 import java.util.List;
 
@@ -9,22 +12,21 @@ public class Device {
     private String type;
     private String model_name;
 
-    @JsonProperty("default")
+    //    @JsonProperty("default")
     private String defaultPolicy;
     private List<String> whiteList;
     private List<String> blackList;
     private Number timeStamp;
     private String url;
 
-    public Device(String type, String model_name, String defaultPolicy, List<String> whiteList, List<String> blackList, Number timeStamp, String url) {
+    @JsonCreator
+    public Device(@JsonProperty("type") String type, @JsonProperty("model_name") String model_name, @JsonProperty("default") String defaultPolicy, @JsonProperty("whitelist") List<String> whiteList) {
         this.type = type;
         this.model_name = model_name;
         this.defaultPolicy = defaultPolicy;
         this.whiteList = whiteList;
-        this.blackList = blackList;
-        this.timeStamp = timeStamp;
-        this.url = url;
     }
+
 
     public String getType() {
         return type;
@@ -81,5 +83,10 @@ public class Device {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }
