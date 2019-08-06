@@ -1,0 +1,16 @@
+[
+  {
+    "type": "profile_create",
+    "model_name": "iPhone",
+    "default": "allow",
+    "timestamp": 1563951287811
+  }
+  {
+    "type": "profile_create",
+    "model_name": "Thinkpad",
+    "default": "allow",
+    "whitelist": [],
+    "blacklist": [],
+    "timestamp": 123123123
+  }
+]

@@ -9,24 +9,43 @@ import java.util.List;
 
 public class Device {
 
+    private String deviceId;
+    private String requestId;
     private String type;
     private String model_name;
-
-    //    @JsonProperty("default")
     private String defaultPolicy;
     private List<String> whiteList;
     private List<String> blackList;
-    private Number timeStamp;
+    private Long timeStamp;
     private String url;
 
     @JsonCreator
-    public Device(@JsonProperty("type") String type, @JsonProperty("model_name") String model_name, @JsonProperty("default") String defaultPolicy, @JsonProperty("whitelist") List<String> whiteList) {
+    public Device(
+            @JsonProperty("device_id") String deviceId,
+            @JsonProperty("request_id") String requestId,
+            @JsonProperty("type") String type,
+            @JsonProperty("model_name") String model_name,
+            @JsonProperty("default") String defaultPolicy,
+            @JsonProperty("whitelist") List<String> whiteList,
+            @JsonProperty("blacklist") List<String> blackList,
+            @JsonProperty("timestamp") Long timeStamp) {
+        this.deviceId = deviceId;
+        this.requestId = requestId;
         this.type = type;
         this.model_name = model_name;
         this.defaultPolicy = defaultPolicy;
         this.whiteList = whiteList;
+        this.blackList = blackList;
+        this.timeStamp = timeStamp;
     }
 
+    public String getDeviceId() {
+        return deviceId;
+    }
+
+    public void setDeviceId(String deviceId) {
+        this.deviceId = deviceId;
+    }
 
     public String getType() {
         return type;
@@ -73,7 +92,7 @@ public class Device {
         return timeStamp;
     }
 
-    public void setTimeStamp(Number timeStamp) {
+    public void setTimeStamp(Long timeStamp) {
         this.timeStamp = timeStamp;
     }
 
