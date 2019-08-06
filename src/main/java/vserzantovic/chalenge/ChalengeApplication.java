@@ -43,6 +43,7 @@ public class ChalengeApplication {
             JSONArray jsonArray = (JSONArray) object;
             List<Device> deviceList = new ArrayList<>();
             Object o = jsonArray.get(0);
+//            s
 
             Type listType = new TypeToken<ArrayList<Device>>(){}.getType();
             List<Device> target2 = new Gson().fromJson(String.valueOf(jsonArray), listType);
