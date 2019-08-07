@@ -37,39 +37,35 @@ public class ChalengeApplication {
 //            System.out.println(device);
 
 
-
+            ObjectMapper objectMapper = new ObjectMapper();
 //            URL resource = ChalengeApplication.class.getClassLoader().getResource("input.json");
             URL resource = ChalengeApplication.class.getClassLoader().getResource("input2.json");
             Object object = parser.parse(new FileReader(resource.getFile()));
 
             JSONArray jsonArray = (JSONArray) object;
+            List<Device> deviceList = new ArrayList<>();
 //            List<Device> deviceList = new ArrayList<>();
-//            Object o = jsonArray.get(0);
 //
             Type listType = new TypeToken<ArrayList<Device>>(){}.getType();
-//            List<Device> target2 = new Gson().fromJson(String.valueOf(jsonArray), listType);
             List<Device> target2 = new Gson().fromJson(String.valueOf(jsonArray), listType);
 
-            jsonArray.stream().forEach(s -> System.out.println("forEach: " + s));
-
-            String json = "{ \"model_name\" : \"iphone\", \"type\" : \"BMW\", \"default\" : \"allow\",  \"whiteList\" : [\"test\",\"test1\"] }";
-            ObjectMapper objectMapper = new ObjectMapper();
-//            Device device = objectMapper.readValue(object.toString(), Device.class);
-//            Device device = objectMapper.readValue(json, Device.class);
+//            jsonArray.stream().forEach(s -> System.out.println("forEach: " + s));
+//            veikia ir ne .stream
+//            jsonArray.stream().forEach(request -> {
+            jsonArray.forEach(request -> {
+                try {
+                    checkJsonItem((JSONObject) request, objectMapper, deviceList);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+//
 //            veikia su vienu
-            checkJson(jsonArray);
+//            checkJson(jsonArray);
             Device device = objectMapper.readValue(jsonArray.get(0).toString(), Device.class);
-            List<Device> deviceList = Arrays.asList(objectMapper.readValue(jsonArray.toString(), Device[].class));
-
-
-//            Stream<Device> ss = jsonArray.stream().map(json1 -> json1.toString());
-//            List<Device> list = ss.collect(Collectors.toList());
-//            List<Device> deviceList = objectMapper.readValue(jsonArray.toString(), listType);
+//            List<Device> deviceList = Arrays.asList(objectMapper.readValue(jsonArray.toString(), Device[].class));
 
             System.out.println(device);
-//            System.out.println(target2);
-//            System.out.println(jsonArray);
-
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -93,5 +89,28 @@ public class ChalengeApplication {
 
     }
 
+    static void checkJsonItem(JSONObject json,  ObjectMapper objectMapper, List<Device> deviceList) throws IOException {
+            if (json.get("type").equals("profile_create")) {
+                Device device = objectMapper.readValue(json.toString(), Device.class);
+                deviceList.add(device);
+            } else if (json.get("type").equals("profile_update")) {
+                Device device = objectMapper.readValue(json.toString(), Device.class);
+                deviceList.add(device);
+            } else {
+                System.out.println("sukurimas request objektas");
+            }
+
+
+//            if (json.get("timestamp") instanceof Long) {
+//                Device device = objectMapper.readValue(json.toString(), Device.class);
+//                deviceList.add(device);
+//                System.out.println("deviceList add" + device);
+//            } else {
+//                System.out.println("blogas json irasas");
+//
+//            }
+
+
+    }
 
 }
