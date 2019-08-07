@@ -16,7 +16,7 @@ public class Device {
     private String defaultPolicy;
     private List<String> whiteList;
     private List<String> blackList;
-    private Long timeStamp;
+    private String timeStamp;
     private String url;
 
     @JsonCreator
@@ -28,7 +28,7 @@ public class Device {
             @JsonProperty("default") String defaultPolicy,
             @JsonProperty("whitelist") List<String> whiteList,
             @JsonProperty("blacklist") List<String> blackList,
-            @JsonProperty("timestamp") Long timeStamp) {
+            @JsonProperty("timestamp") String timeStamp) {
         this.deviceId = deviceId;
         this.requestId = requestId;
         this.type = type;
@@ -88,11 +88,11 @@ public class Device {
         this.blackList = blackList;
     }
 
-    public Number getTimeStamp() {
+    public String getTimeStamp() {
         return timeStamp;
     }
 
-    public void setTimeStamp(Long timeStamp) {
+    public void setTimeStamp(String timeStamp) {
         this.timeStamp = timeStamp;
     }
 

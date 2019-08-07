@@ -50,6 +50,8 @@ public class ChalengeApplication {
 //            List<Device> target2 = new Gson().fromJson(String.valueOf(jsonArray), listType);
             List<Device> target2 = new Gson().fromJson(String.valueOf(jsonArray), listType);
 
+            jsonArray.stream().forEach(s -> System.out.println("forEach: " + s));
+
             String json = "{ \"model_name\" : \"iphone\", \"type\" : \"BMW\", \"default\" : \"allow\",  \"whiteList\" : [\"test\",\"test1\"] }";
             ObjectMapper objectMapper = new ObjectMapper();
 //            Device device = objectMapper.readValue(object.toString(), Device.class);
