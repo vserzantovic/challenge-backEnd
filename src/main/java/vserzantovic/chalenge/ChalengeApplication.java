@@ -27,15 +27,9 @@ public class ChalengeApplication {
 
         SpringApplication.run(ChalengeApplication.class, args);
         JSONParser parser = new JSONParser();
+        List<Response> responseList = new ArrayList<>();
 
         try {
-//            Gson gson = new Gson();
-//            URL resource = ChalengeApplication.class.getClassLoader().getResource("input.json");
-//            Reader reader = new FileReader(resource.getFile());
-//            List<Device> device = gson.fromJson(reader, Device.class);
-//
-//            System.out.println(device);
-
 
             ObjectMapper objectMapper = new ObjectMapper();
 //            URL resource = ChalengeApplication.class.getClassLoader().getResource("input.json");
@@ -44,9 +38,9 @@ public class ChalengeApplication {
 
             JSONArray jsonArray = (JSONArray) object;
             List<Device> deviceList = new ArrayList<>();
-//            List<Device> deviceList = new ArrayList<>();
 //
-            Type listType = new TypeToken<ArrayList<Device>>(){}.getType();
+            Type listType = new TypeToken<ArrayList<Device>>() {
+            }.getType();
             List<Device> target2 = new Gson().fromJson(String.valueOf(jsonArray), listType);
 
 //            jsonArray.stream().forEach(s -> System.out.println("forEach: " + s));
@@ -54,7 +48,7 @@ public class ChalengeApplication {
 //            jsonArray.stream().forEach(request -> {
             jsonArray.forEach(request -> {
                 try {
-                    checkJsonItem((JSONObject) request, objectMapper, deviceList);
+                    checkJsonItem((JSONObject) request, objectMapper, deviceList, responseList);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -89,28 +83,41 @@ public class ChalengeApplication {
 
     }
 
-    static void checkJsonItem(JSONObject json,  ObjectMapper objectMapper, List<Device> deviceList) throws IOException {
-            if (json.get("type").equals("profile_create")) {
+    static void checkJsonItem(JSONObject json, ObjectMapper objectMapper, List<Device> deviceList, List<Response> responseList) throws IOException {
+        if (json.get("type").equals("profile_create")) {
+            Device device = objectMapper.readValue(json.toString(), Device.class);
+            deviceList.add(device);
+        } else if (json.get("type").equals("profile_update")) {
+
+            for (int i = 0; i < deviceList.size(); i++) {
                 Device device = objectMapper.readValue(json.toString(), Device.class);
-                deviceList.add(device);
-            } else if (json.get("type").equals("profile_update")) {
-                Device device = objectMapper.readValue(json.toString(), Device.class);
-                deviceList.add(device);
-            } else {
-                System.out.println("sukurimas request objektas");
+                if (deviceList.get(i).getModel_name().equals(json.get("model_name"))) {
+                    deviceList.set(i, device);
+                }
             }
 
+        } else {
+            if (checkRequest(json, deviceList)) {
+                System.out.println("surasstas atitinkamas model_name");
+            } else {
+                System.out.println("nesurastas atitinkantis device'as pagal model_name");
+            }
+//                validating....
+            Response response = new Response(json.get("request_id").toString(), json.get("device_id").toString(), "allow");
+            responseList.add(response);
+            System.out.println("sukurimas request objektas");
+        }
 
-//            if (json.get("timestamp") instanceof Long) {
-//                Device device = objectMapper.readValue(json.toString(), Device.class);
-//                deviceList.add(device);
-//                System.out.println("deviceList add" + device);
-//            } else {
-//                System.out.println("blogas json irasas");
-//
-//            }
 
+    }
 
+    static boolean checkRequest(JSONObject json, List<Device> deviceList) {
+        for (Device device : deviceList) {
+            if (device.getModel_name().equals(json.get("model_name"))) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

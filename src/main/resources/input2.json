@@ -13,4 +13,21 @@
     "blacklist": [],
     "timestamp": "asdadsa"
   }
+  {
+    "type": "request",
+    "request_id": "00ee3fde22f24384a21fbfcd2ba2ddc8",
+    "model_name": "iPhone",
+    "device_id": "d7c29fd60cee4e5f848bd198bcc2e100",
+    "url": "bbc.co.uk",
+    "timestamp": 1563951288854
+  }
+
+  {
+    "type": "profile_update",
+    "model_name": "Thinkpad",
+    "whitelist": [
+      "api.lightbulb.io"
+    ],
+    "timestamp": 1563951341680
+  }
 ]
