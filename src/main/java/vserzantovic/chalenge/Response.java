@@ -39,4 +39,9 @@ public class Response {
     public void setAction(String action) {
         this.action = action;
     }
+
+    @Override
+    public String toString(){
+        return "requestId "+requestId+", action :" +action;
+    }
 }

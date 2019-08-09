@@ -3,13 +3,15 @@
     "type": "profile_create",
     "model_name": "iPhone",
     "default": "allow",
+    "whitelist": [],
+    "blacklist": ["fake_bank.com"],
     "timestamp": 1563951287811
   }
   {
     "type": "profile_create",
     "model_name": "Thinkpad",
-    "default": "allow",
-    "whitelist": [],
+    "default": "block",
+    "whitelist": ["bbc.co.uk", "facebook.com"],
     "blacklist": [],
     "timestamp": "asdadsa"
   }
@@ -18,16 +20,31 @@
     "request_id": "00ee3fde22f24384a21fbfcd2ba2ddc8",
     "model_name": "iPhone",
     "device_id": "d7c29fd60cee4e5f848bd198bcc2e100",
-    "url": "bbc.co.uk",
+    "url": "facebook.com",
     "timestamp": 1563951288854
-  }
-
+  },
+  {
+    "type": "request",
+    "request_id": "0c3abf582a094573b9e8ca3d1fda9317",
+    "model_name": "Thinkpad",
+    "device_id": "d7c29fd60cee4e5f848bd198bcc2e111",
+    "url": "fake_bank.com",
+    "timestamp": 1563951298449
+  },
   {
     "type": "profile_update",
     "model_name": "Thinkpad",
     "whitelist": [
-      "api.lightbulb.io"
+      "google.com"
     ],
     "timestamp": 1563951341680
+  },
+  {
+    "type": "request",
+    "request_id": "0c3abf582a094573b9e8ca3d1fda944",
+    "model_name": "Thinkpad",
+    "device_id": "d7c29fd60cee4e5f848bd198bcc2e111",
+    "url": "google22.com",
+    "timestamp": 1563951298449
   }
 ]
