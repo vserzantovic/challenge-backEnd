@@ -1,4 +1,4 @@
-package vserzantovic.chalenge;
+package vserzantovic.challenge;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

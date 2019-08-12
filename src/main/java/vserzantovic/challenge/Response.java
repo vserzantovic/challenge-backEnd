@@ -1,4 +1,4 @@
-package vserzantovic.chalenge;
+package vserzantovic.challenge;
 
 public class Response {
     private String requestId;
@@ -6,8 +6,11 @@ public class Response {
     private String action;
 
     public Response(String requestId, String deviceId, String action) {
-        this.requestId = requestId;
-        this.deviceId = deviceId;
+        if (action.equals(Constants.QUARANTINE.getText())) {
+            this.deviceId = deviceId;
+        } else {
+            this.requestId = requestId;
+        }
         this.action = action;
     }
 
@@ -42,6 +45,11 @@ public class Response {
 
     @Override
     public String toString(){
-        return "requestId "+requestId+", action :" +action;
+        if(action.equals(Constants.QUARANTINE.getText())) {
+            return "device_id: "+deviceId+", action :" +action;
+        } else {
+            return "request_id: "+requestId+", action :" +action;
+        }
+
     }
 }

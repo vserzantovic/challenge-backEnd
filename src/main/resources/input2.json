@@ -6,7 +6,7 @@
     "whitelist": [],
     "blacklist": ["fake_bank.com"],
     "timestamp": 1563951287811
-  }
+  },
   {
     "type": "profile_create",
     "model_name": "Thinkpad",
@@ -14,7 +14,7 @@
     "whitelist": ["bbc.co.uk", "facebook.com"],
     "blacklist": [],
     "timestamp": "asdadsa"
-  }
+  },
   {
     "type": "request",
     "request_id": "00ee3fde22f24384a21fbfcd2ba2ddc8",
@@ -46,5 +46,13 @@
     "device_id": "d7c29fd60cee4e5f848bd198bcc2e111",
     "url": "google22.com",
     "timestamp": 1563951298449
+  },
+  {
+    "type": "request",
+    "request_id": "1a71f614fc6a46b496d692b4ba015b26",
+    "model_name": "Thinkpad",
+    "device_id": "d7c29fd60cee4e5f848bd198bcc2e100",
+    "url": 1563951307799,
+    "timestamp": 1563951367439
   }
 ]
